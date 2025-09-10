@@ -9,14 +9,14 @@ lerna-debug.log*
 
 node_modules
 coverage
-dist
+# dist
 dist-ssr
 *.local
 
 /cyperss/videos/
 /cypress/srceenshots/
 
-# .vitepress/dist
+.vitepress/dist
 .vitepress/cache
 
 # Editor directories and files
