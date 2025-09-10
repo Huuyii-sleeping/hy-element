@@ -12,16 +12,16 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
 
-      - name: Install pnpm
+      - name: Install pnpm 
         run: npm install -g pnpm
 
       - name: Install dependencies
-        run: npm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Run tests
         run: npm run test
@@ -39,10 +39,10 @@ jobs:
         uses: actions/setup-node@v4
 
       - name: Install pnpm
-        run: npm install -g pnpmff
+        run: npm install -g pnpm
 
       - name: Install dependencies
-        run: npm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Build docs
         run: npm run docs:build
