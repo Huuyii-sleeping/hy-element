@@ -3,7 +3,7 @@ name: Test and deploy
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   test:
@@ -67,4 +67,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GH_TOKEN }}
-          publish_dir: ./docs
+          publish_dir: .
