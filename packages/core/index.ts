@@ -1,4 +1,4 @@
-import '@hy-element/theme'
+import '@hy-element/theme/index.css'
 import { makeInstaller } from '@hy-element/utils'
 import component from './component'
 
