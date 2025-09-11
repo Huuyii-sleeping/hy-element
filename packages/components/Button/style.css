@@ -1,3 +1,6 @@
+.hy-button-group {
+	--hy-button-group-border-color: var(--hy-border-color-lighter);
+}
 .hy-button {
 	--hy-button-font-weight: var(--hy-font-weight-primary);
 	--hy-button-border-color: var(--hy-border-color);

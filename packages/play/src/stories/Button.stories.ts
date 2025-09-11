@@ -1,7 +1,7 @@
 import type { Meta, StoryObj, ArgTypes } from '@storybook/vue3'
 import { clearAllMocks, expect, fn, userEvent, within } from '@storybook/test'
-import { hyButton } from 'hy-element'
-import { set, template } from 'lodash-es'
+import { hyButton, hyButtonGroup } from 'hy-element'
+import { set } from 'lodash-es'
 
 type Story = StoryObj<typeof hyButton> & { argTypes?: ArgTypes }
 
@@ -190,7 +190,7 @@ export const Circle: Story = {
 	},
 	render: (args: any) => ({
 		components: { hyButton },
-		setup(){
+		setup() {
 			return { args }
 		},
 		template: container(
@@ -207,6 +207,67 @@ export const Circle: Story = {
 	}
 }
 
+export const Group: Story & { args: { content1: string; content2: string } } = {
+	argTypes: {
+		groupType: {
+			control: { type: 'select' },
+			options: ['primary', 'success', 'warning', 'danger', 'info', ''],
+		},
+		groupSize: {
+			control: { type: 'select' },
+			options: ['large', 'default', 'small', ''],
+		},
+		groupDisabled: {
+			control: 'boolean',
+		},
+		content1: {
+			control: { type: 'text' },
+			defaultValue: 'Button1',
+		},
+		content2: {
+			control: { type: 'text' },
+			defaultValue: 'Button2',
+		},
+	},
+	args: {
+		round: true,
+		content1: 'Button1',
+		content2: 'Button2',
+	},
+	render: (args: any) => ({
+		components: { hyButton, hyButtonGroup }, //用 hyButtonGroup 包裹多个按钮，实现按钮组布局
+		setup() {
+			return { args }
+		},
+		//:type="args.groupType"：按钮组的主题类型（如 primary）
+		//:size="args.groupSize"：按钮组的大小（如 large）
+		//:disabled="args.groupDisabled"：按钮组的禁用状态
+		template: container(`
+       <hy-button-group :type="args.groupType" :size="args.groupSize" :disabled="args.groupDisabled">
+         <hy-button v-bind="args">{{args.content1}}</hy-button>
+         <hy-button v-bind="args">{{args.content2}}</hy-button>
+       </hy-button-group>
+    `),
+	}),
+	play: async ({
+		canvasElement,
+		args,
+		step,
+	}: {
+		canvasElement: HTMLElement
+		args: any
+		step: any
+	}) => {
+		const canvas = within(canvasElement)
+		await step('click btn1', async () => {
+			await userEvent.click(canvas.getByText('Button1'))
+		})
+		await step('click btn2', async () => {
+			await userEvent.click(canvas.getByText('Button2'))
+		})
+		expect(args.onClick).toHaveBeenCalled()
+	},
+}
 
 
 export default meta
