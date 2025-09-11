@@ -1,4 +1,4 @@
-import { hyButton } from "@hy-element/components";
+import { hyButton, hyIcon } from "@hy-element/components";
 import type { Plugin } from 'vue'
 
-export default [hyButton] as Plugin[]
+export default [hyButton, hyIcon] as Plugin[]
