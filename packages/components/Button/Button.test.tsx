@@ -1,17 +1,19 @@
 import { describe, it, expect } from "vitest";
-import {mount} from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import Button from "./Button.vue";
+import Icon from "../Icon/Icon.vue";
+import test from "node:test";
 
 describe('Button.vue', () => {
     it('should has the corrent type class when type prop is set', () => {
         const types = ['primary', 'success', 'warning', 'danger', 'info']
         types.forEach((type) => {
             const wrapper = mount(Button, {
-                props: { type: type as any}
+                props: { type: type as any }
             })
             expect(wrapper.classes()).toContain(`hy-button--${type}`)
         })
-    })  
+    })
 
     it('should has the corrent size class when size prop is set', () => {
         const sizes = ['large', 'default', 'small']
@@ -40,6 +42,9 @@ describe('Button.vue', () => {
                     stubs: ['hyIcon'],
                 }
             })
+            /**
+             * mount 借助Vitest借助挂载，传入props和全局配置
+             */
             expect(wrapper.classes()).toContain(className)
         }
     )
@@ -67,5 +72,72 @@ describe('Button.vue', () => {
         const wrapper = mount(Button, {})
         await wrapper.trigger('click')
         expect(wrapper.emitted().click).toHaveLength(1)
+    })
+
+    it('should display loading icon and not emit click event when button is loading',
+        async () => {
+            const wrapper = mount(Button, {
+                props: { loading: true },
+                global: {
+                    stubs: ['hyIcon'],
+                }
+            })
+            const iconElement = wrapper.findComponent(Icon)
+            expect(wrapper.find('.loading-icon').exists()).toBe(true)
+            expect(iconElement.exists()).toBeTruthy()
+            expect(iconElement.attributes('icon')).toBe('spinner')
+            await wrapper.trigger('click')
+            expect(wrapper.emitted('click')).toBeUndefined()
+        }
+    )
+
+    it('should display loading icon', async () => {
+        const wrapper = mount(Button, {
+            props: { loading: true },
+            global: {
+                stubs: ['hyIcon']
+            }
+        })
+        const iconElement = wrapper.findComponent(Icon)
+        expect(iconElement.exists()).toBeTruthy()
+        expect(iconElement.attributes('icon')).toBe('spinner')
+        await wrapper.trigger('click')
+        expect(wrapper.emitted('click')).toBeUndefined()
+    })
+
+    test('loading icon', () => {
+        const wrapper = mount(Button, {
+            props: { loading: true },
+            slots: { default: 'loading button' }, // 设置slot的内容
+            global: {
+                stubs: ['hyIcon'],
+            }
+        })
+        // class
+        expect(wrapper.classes()).toContain('is-loading')
+        // attrs
+        expect(wrapper.attributes('disabled')).toBeDefined()
+        expect(wrapper.find('button').element.disabled).toBeTruthy()
+        // events
+        wrapper.get('button').trigger('click')
+        expect(wrapper.emitted()).not.toHaveProperty('click')
+        // icon
+        const iconElement = wrapper.findComponent(Icon)
+        expect(iconElement.exists()).toBeTruthy()
+        expect(iconElement.attributes('icon')).toBe('spinner')
+    })
+
+    test('icon button', () => {
+        const wrapper = mount(Button, {
+            props: { icon: 'arrow-up' },
+            slots: { default: 'icon button' },
+            global: {
+                stubs: ['hyIcon']
+            }
+        })
+
+        const iconElement = wrapper.findComponent(Icon)
+        expect(iconElement.exists()).toBeTruthy()
+        expect(iconElement.attributes()).toBe('arrow-up')
     })
 })

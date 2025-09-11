@@ -40,10 +40,9 @@ const slots = defineSlots()
 const _ref = ref<HTMLButtonElement>()
 const iconStyle = computed(() => ({ marginRight: slots.default ? '6px' : '0px' }))
 const handleBtnClick = (e: MouseEvent) => {
-    console.log('按钮点击')
     emits('click', e)
 }
-const handleBtnClickThrottle = throttle(handleBtnClick, props.throttleDuration)
+const handleBtnClickThrottle = throttle(handleBtnClick, props.throttleDuration, { trailing: false })
 
 defineExpose<ButtonInstance>({
     ref: _ref

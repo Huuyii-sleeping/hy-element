@@ -1,6 +1,7 @@
 import type { Meta, StoryObj, ArgTypes } from '@storybook/vue3'
-import { expect, fn, userEvent, within } from '@storybook/test'
+import { clearAllMocks, expect, fn, userEvent, within } from '@storybook/test'
 import { hyButton } from 'hy-element'
+import { set, template } from 'lodash-es'
 
 type Story = StoryObj<typeof hyButton> & { argTypes?: ArgTypes }
 
@@ -72,6 +73,7 @@ export const Default: Story & { args: { content: string } } = {
 	args: {
 		type: 'primary',
 		content: 'Button',
+
 	},
 	/**
 	 * 自定义渲染函数，用来控制组件如何被渲染
@@ -83,7 +85,7 @@ export const Default: Story & { args: { content: string } } = {
 			return { args } // 分开暴露
 		},
 		template: container(
-			`<hy-button @click="args.onClick" v-bind="args">{{ args.content }}</hy-button>`
+			`<hy-button data-testid="story-test-btn" @click="args.onClick" v-bind="args">{{ args.content }}</hy-button>`
 		)
 	}),
 	/**
@@ -94,6 +96,7 @@ export const Default: Story & { args: { content: string } } = {
 	play: async ({ canvasElement, args, step }: any) => {
 		// 将element转化成上下文对象 查找元素
 		const canvas = within(canvasElement)
+		const btn = canvas.getByTestId('story-test-btn')
 
 		// click btn步骤的名称 后面是操作
 		await step('click btn', async () => {
@@ -102,8 +105,108 @@ export const Default: Story & { args: { content: string } } = {
 		})
 
 		expect(args.onClick).toHaveBeenCalled()
-	}
 
+		// 测试thorttle是否成功
+		await step(
+			'when useThorttle is set to true, the onClick should be called one times',
+			async () => {
+				set(args, 'useThrottle', true)
+				await userEvent.tripleClick(btn)
+				expect(args.onClick).toHaveBeenCalledOnce()
+				clearAllMocks()
+			}
+		)
+
+		await step(
+			'when useThorttle is set to false, the onClick should be called three times',
+			async () => {
+				set(args, 'useThrottle', false)
+				await userEvent.tripleClick(btn)
+				expect(args.onClick).toHaveBeenCalledTimes(3)
+				clearAllMocks()
+			}
+		)
+
+		await step(
+			'when disabled is set to true, the onClick should not to be called',
+			async () => {
+				set(args, 'disabled', true)
+				await userEvent.click(btn)
+
+				expect(args.onClick).toHaveBeenCalledTimes(0)
+
+				set(args, 'disabled', false)
+				await userEvent.click(btn)
+				expect(args.onClick).toHaveBeenCalledTimes(1)
+				clearAllMocks()
+			}
+		)
+
+		await step(
+			'when laoding is set to true, the onClick should not to be called',
+			async () => {
+				set(args, 'loading', true)
+				await userEvent.click(btn)
+				expect(args.onClick).toHaveBeenCalledTimes(0)
+				set(args, 'loading', false)
+				clearAllMocks()
+			}
+		)
+	}
 }
+
+// 测试自动聚焦
+export const autofocus: Story & { args: { content: string } } = {
+	argsTypes: {
+		content: {
+			control: { type: 'text' }
+		}
+	},
+	args: {
+		content: 'Button',
+		autofocus: true
+	},
+	render: (args: any) => ({
+		omponents: { hyButton },
+		setup() {
+			return { args }
+		},
+		template: container(
+			`<p>请点击浏览器刷新页面获取按钮聚焦</p>
+			<hy-button data-testid="story-test-id" v-bind="args">{{ args.content }}</hy-button>`
+		)
+	}),
+	play: async ({ args }: any) => {
+		await userEvent.keyboard("{enter}")
+		expect(args.onClick).toHaveBeenCalledOnce()
+		clearAllMocks()
+	}
+}
+
+// 测试circle
+export const Circle: Story = {
+	args: {
+		icon: 'search'
+	},
+	render: (args: any) => ({
+		components: { hyButton },
+		setup(){
+			return { args }
+		},
+		template: container(
+			`<hy-button circle v-bind="args"></hy-button>`
+		),
+	}),
+	play: async ({ canvasElement, args, step }: any) => {
+		const canvas = within(canvasElement)
+		const btn = canvas.getByRole('button')
+		await step('click button', async () => {
+			await userEvent.click(btn)
+		})
+		expect(args.onClick).toHaveBeenCalled()
+	}
+}
+
+
 
 export default meta
