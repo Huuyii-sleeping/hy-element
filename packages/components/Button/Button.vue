@@ -3,7 +3,7 @@ import { ref, computed, inject } from 'vue'
 import type { ButtonProps, ButtonEmits, ButtonInstance } from './types'
 import { BUTTON_GROUP_CTX_KEY } from './contants'
 import { throttle } from 'lodash-es'
-import hyIcon from '../Icon/Icon.vue'
+import  hyIcon  from '../Icon/Icon.vue'
 defineOptions({
     name: 'hyButton',
 })

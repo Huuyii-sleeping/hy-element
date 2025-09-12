@@ -1,5 +1,5 @@
 <template>
-    <i class="hy-icon" :class="[`hy-icon-${props.type}`]" :style="customStyles" v-bind="$attrs">
+    <i class="hy-icon" :class="{ [`hy-icon-${type}`]: type }" :style="customStyles" v-bind="$attrs">
         <font-awesome-icon v-bind="fliterProps" />
     </i>
 </template>
@@ -19,6 +19,6 @@ const fliterProps = computed(() => omit(props, ['type', 'color']))
 const customStyles = computed(() => ({ color: props.color ?? void 0 }))
 </script>
 
-<style scoped>
+<style>
 @import './style.css'
 </style>

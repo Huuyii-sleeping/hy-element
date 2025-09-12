@@ -7,5 +7,5 @@ import component from './component'
 library.add(fas)
 const installer = makeInstaller(component)
 
-export * from '@hy-element/components'
+export * from '../components'
 export default installer
