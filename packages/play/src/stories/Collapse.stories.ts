@@ -1,6 +1,5 @@
 import type { Meta, StoryObj, ArgTypes } from '@storybook/vue3'
 import { hyCollapse, hyCollapseItem } from 'hy-element'
-import 'hy-element/dist/index.css'
 
 type Story = StoryObj<typeof hyCollapse> & { argTypes?: ArgTypes }
 

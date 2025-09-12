@@ -6,6 +6,11 @@ import { readdirSync } from 'fs'
 import { delay, filter, includes, map } from 'lodash-es'
 import shell from 'shelljs'
 import hooks from './hooksPlugin'
+import terser from '@rollup/plugin-terser'
+
+const isProd = process.env.NODE_ENV === 'production'
+const isDev = process.env.NODE_ENV === 'development'
+const isTest = process.env.NODE_ENV === 'test'
 
 function getDirectoriesSync(basePath: string) {
     const entries = readdirSync(basePath, { withFileTypes: true })
@@ -36,11 +41,39 @@ export default defineConfig({
         hooks({
             rmFiles: ['./dist/es', './dist/theme', './dist/types'],
             afterBuild: moveStyles,
+        }),
+        // 在生产环境极致的压缩，混淆优化代码体积，在开发环境保留可读性便于调试
+        terser({
+            compress: {// 控制压缩行为，（删除无用代码，合并语句）
+                sequences: isProd,
+                arguments: isProd,
+                drop_console: isProd && ['log'],
+                drop_debugger: isProd,
+                passes: isProd ? 4 : 1,
+                global_defs: {
+                    '@DEV': JSON.stringify(isDev),
+                    '@PROD': JSON.stringify(isProd),
+                    '@TEST': JSON.stringify(isTest),
+                }
+            },
+            format: { // 控制输出函数，（美化 压缩排版）
+                semicolons: false,
+                shorthand: isProd,
+                braces: !isProd,
+                beautify: !isProd,
+                comments: !isProd,
+            },
+            mangle: { // 控制变量名/函数名美化
+                toplevel: isProd,
+                eval: isProd,
+                keep_classnames: isDev,
+                keep_fnames: isDev
+            },
         })
     ],
     build: {
         outDir: 'dist/es',
-        minify: false,
+        minify: false, // 禁止代码压缩，让输出的文件保证可读性
         cssCodeSplit: true, // 对css进行分包
         lib: {
             entry: resolve(__dirname, './index.ts'),

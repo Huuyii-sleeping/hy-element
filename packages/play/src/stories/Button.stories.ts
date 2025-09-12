@@ -2,7 +2,6 @@ import type { Meta, StoryObj, ArgTypes } from '@storybook/vue3'
 import { clearAllMocks, expect, fn, userEvent, within } from '@storybook/test'
 import { hyButton, hyButtonGroup } from 'hy-element'
 import { set } from 'lodash-es'
-import 'hy-element/dist/index.css'
 
 type Story = StoryObj<typeof hyButton> & { argTypes?: ArgTypes }
 

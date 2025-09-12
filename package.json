@@ -8,8 +8,9 @@
 		"story": "pnpm --filter @hy-element/play storybook",
 		"docs:dev": "pnpm --filter @hy-element/docs dev",
 		"docs:build": "pnpm --filter @hy-element/docs build",
-		"test": "pnpm --filter @hy-element/components test",
-		"build": "pnpm --filter hy-element build"
+		"test": "cross-env NODE_ENV=test pnpm --filter @hy-element/components test",
+		"build": "cross-env NODE_ENV=production pnpm --filter hy-element build",
+		"build:dev": "cross-env NODE_ENV=development pnpm --filter hy-element build:watch"
 	},
 	"keywords": [],
 	"author": "",

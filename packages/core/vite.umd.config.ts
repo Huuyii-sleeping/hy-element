@@ -6,6 +6,12 @@ import { readFileSync } from 'fs'
 import shell from 'shelljs'
 import { delay } from 'lodash-es'
 import hooks from './hooksPlugin'
+import terser from '@rollup/plugin-terser'
+
+const isProd = process.env.NODE_ENV === 'production'
+const isDev = process.env.NODE_ENV === 'development'
+const isTest = process.env.NODE_ENV === 'test'
+
 
 const TRY_MOVE_STYLES_DELAY = 800 as const
 
@@ -27,8 +33,23 @@ export default defineConfig({
         hooks({
             rmFiles: ['./dist/umd', './dist/index.css'],
             afterBuild: moveStyles,
-            
-        })],
+
+        }),
+        terser({
+            compress: {
+                sequences: isProd,
+                arguments: isProd,
+                drop_console: isProd && ['log'],
+                drop_debugger: isProd,
+                passes: isProd ? 4 : 1,
+                global_defs: {
+                    '@DEV': JSON.stringify(isDev),
+                    '@PROD': JSON.stringify(isProd),
+                    '@TEST': JSON.stringify(isTest),
+                }
+            }
+        })
+    ],
     build: {
         outDir: 'dist/umd',
         lib: {

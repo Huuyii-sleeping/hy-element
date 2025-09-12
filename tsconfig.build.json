@@ -23,17 +23,24 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "baseUrl": "./",
     "paths": {
-      "@hy-element/components": ["./packages/components"]
+      "@hy-element/components": [
+        "./packages/components"
+      ]
     }
   },
   "include": [
+    "env.d.ts",
     "packages/core/index.ts",
     "packages/hooks/**/*.ts",
     "packages/utils/**/*.ts",
     "packages/components/**/*.ts",
   ],
-  "exclude": ["packages/components/vitest.config.ts"]
+  "exclude": [
+    "packages/components/vitest.config.ts"
+  ]
 }

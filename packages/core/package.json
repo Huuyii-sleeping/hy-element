@@ -25,10 +25,12 @@
 		}
 	},
 	"scripts": {
-		"build": "run-s build-only",
-		"build-only": "run-p build-es build-umd",
+		"build": "run-p build-es build-umd",
+		"build:watch": "run-p build-es:watch build-umd:watch",
 		"build-umd": "vite build --config vite.umd.config.ts",
 		"build-es": "vite build --config vite.es.config.ts",
+		"build-umd:watch": "vite build --watch --config vite.umd.config.ts",
+		"build-es:watch": "vite build --watch --config vite.es.config.ts",
 		"release": "release-it"
 	},
 	"keywords": [],
@@ -39,7 +41,7 @@
 		"release-it": "^18.1.2",
 		"rimraf": "^6.0.1",
 		"rollup-plugin-visualizer": "^5.12.0",
-		"terser": "^5.31.0",
+		"terser": "^5.44.0",
 		"vite-plugin-compression": "^0.5.1",
 		"vite-plugin-compression2": "^2.2.1"
 	},
