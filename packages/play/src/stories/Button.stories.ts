@@ -2,6 +2,7 @@ import type { Meta, StoryObj, ArgTypes } from '@storybook/vue3'
 import { clearAllMocks, expect, fn, userEvent, within } from '@storybook/test'
 import { hyButton, hyButtonGroup } from 'hy-element'
 import { set } from 'lodash-es'
+import 'hy-element/dist/index.css'
 
 type Story = StoryObj<typeof hyButton> & { argTypes?: ArgTypes }
 
@@ -87,7 +88,7 @@ export const Default: Story & { args: { content: string } } = {
 		template: container(
 			`<hy-button data-testid="story-test-btn" @click="args.onClick" v-bind="args">{{ args.content }}</hy-button>`
 		)
-	}),
+	}) as any,
 	/**
 	 * canvasElement 当前Story的渲染容器
 	 * args 传递的参数
@@ -157,7 +158,7 @@ export const Default: Story & { args: { content: string } } = {
 
 // 测试自动聚焦
 export const autofocus: Story & { args: { content: string } } = {
-	argsTypes: {
+	argTypes: {
 		content: {
 			control: { type: 'text' }
 		}
@@ -196,7 +197,7 @@ export const Circle: Story = {
 		template: container(
 			`<hy-button circle v-bind="args"></hy-button>`
 		),
-	}),
+	}) as any,
 	play: async ({ canvasElement, args, step }: any) => {
 		const canvas = within(canvasElement)
 		const btn = canvas.getByRole('button')
@@ -248,7 +249,7 @@ export const Group: Story & { args: { content1: string; content2: string } } = {
          <hy-button v-bind="args">{{args.content2}}</hy-button>
        </hy-button-group>
     `),
-	}),
+	}) as any,
 	play: async ({
 		canvasElement,
 		args,
