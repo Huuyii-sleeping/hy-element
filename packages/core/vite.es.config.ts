@@ -81,7 +81,7 @@ export default defineConfig({
                         if (includes(id, `/packages/components/${item}`)) {
                             return item
                         }
-                    }
+                    } 
                 }
             }
         }
