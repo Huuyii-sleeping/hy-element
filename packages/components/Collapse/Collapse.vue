@@ -5,8 +5,11 @@
 import type { CollapseProps, CollapseEmits, CollapseItemName } from './types';
 import { ref, provide, watch, watchEffect } from 'vue'
 import { COLLAPSE_CONTEXT } from './contants';
+import { debugWarn } from '@hy-element/utils';
+
+const COMP_NAME = 'hyCollapse' as const
 defineOptions({
-    name: 'hyCollapse'
+    name: COMP_NAME
 })
 // 定义 组件接收的props和emits事件 
 const props = defineProps<CollapseProps>()
@@ -48,7 +51,7 @@ watch(() => props.modelValue, (newNames) => updateActiveNames(newNames))
 // according 代表只能有一个对应的value 不能是数组
 watchEffect(() => {
     if(props.according && activeNames.value.length > 1){
-        console.warn('according mode should only have one active name')
+        debugWarn(COMP_NAME, 'according mode should only have one active name')
     }
 })
 // 提供上下文给子组件

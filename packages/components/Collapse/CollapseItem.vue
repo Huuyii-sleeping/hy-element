@@ -3,7 +3,7 @@ import type { CollapseItemProps } from './types';
 import { COLLAPSE_CONTEXT } from './contants';
 import { inject, computed } from 'vue';
 import hyIcon from '../Icon/Icon.vue';
-
+import transitionEvents from './transitionEvents';
 defineOptions({
     name: 'hyCollapseItem'
 })
@@ -28,11 +28,14 @@ function handleClick() {
             </span>
             <hy-icon icon="angle-right" class="header-angle"></hy-icon>
         </div>
-        <div class="hy-collapse-item__wapper" v-show="isActive">
-            <div class="hy-collapse-item__content" :id="`item-content-${name}`">
-                <slot></slot>
+        <transition name="slide" v-on="transitionEvents">
+            <div class="hy-collapse-item__wapper" v-show="isActive">
+                <div class="hy-collapse-item__content" :id="`item-content-${name}`">
+                    <slot></slot>
+                </div>
             </div>
-        </div>
+        </transition>
+
     </div>
 </template>
 
