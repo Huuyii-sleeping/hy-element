@@ -2,34 +2,46 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 import dts from 'vite-plugin-dts'
+import { readdirSync } from 'fs'
+import { delay, filter, includes, map } from 'lodash-es'
+import shell from 'shelljs'
+import hooks from './hooksPlugin'
 
-const COMP_NAME = [
-    'Alert',
-    'Button',
-    'Collapse',
-    'Dropdown',
-    'From',
-    'Icon',
-    'Input',
-    'Loading',
-    'Message',
-    'MessageBox',
-    'Notification',
-    'Overlay',
-    'Popconfirm',
-    'Select',
-    'Switch',
-    'Tooltip',
-    'Upload',
-] as const
+function getDirectoriesSync(basePath: string) {
+    const entries = readdirSync(basePath, { withFileTypes: true })
+
+    return map(
+        filter(entries, (entry) => entry.isDirectory()),
+        (entry) => entry.name
+    )
+}
+
+const TRY_MOVE_STYLES_DELAY = 800 as const
+function moveStyles() {
+    try {
+        readdirSync('./dist/es/theme')
+        shell.cp('./dist/es/theme', './dist')
+    } catch (error) {
+        delay(moveStyles, TRY_MOVE_STYLES_DELAY)
+    }
+}
 
 export default defineConfig({
-    plugins: [vue(), dts({
-        tsconfigPath: '../../tsconfig.build.json',
-        outDir: 'dist/types'
-    }) as any],
+    plugins: [
+        vue(),
+        dts({
+            tsconfigPath: '../../tsconfig.build.json',
+            outDir: 'dist/types'
+        }) as any,
+        hooks({
+            rmFiles: ['./dist/es', './dist/theme', './dist/types'],
+            afterBuild: moveStyles,
+        })
+    ],
     build: {
         outDir: 'dist/es',
+        minify: false,
+        cssCodeSplit: true, // 对css进行分包
         lib: {
             entry: resolve(__dirname, './index.ts'),
             name: 'hyElement',
@@ -48,26 +60,29 @@ export default defineConfig({
             output: {
                 assetFileNames: (assetInfo) => {
                     if (assetInfo.name === 'style.css') return 'index.css'
+                    if (assetInfo.type === 'asset' && /\.(css)$/i.test(assetInfo.name as string)) {
+                        return 'theme/[name].[ext]'
+                    }
                     return assetInfo.name as string
                 },
                 // 进行分包处理
-                manualChunks(id){
+                manualChunks(id) {
                     // console.log(id)
-                    if(id.includes('node_modules')){
+                    if (id.includes('node_modules')) {
                         return 'vendor'
                     }
-                    if(id.includes('/packages/hooks')){
+                    if (id.includes('/packages/hooks')) {
                         return 'hooks'
                     }
-                    if(id.includes('/packages/utils')){
+                    if (id.includes('/packages/utils') || id.includes('plugin-vue:export-helper')) {
                         return 'utils'
-                    }
-                    for (const item of COMP_NAME) {
-                        if(id.includes(`/packages/components/${item}`)){
+                    } 
+                    for (const item of getDirectoriesSync('../components')) {
+                        if (includes(id, `/packages/components/${item}`)) {
                             return item
                         }
                     }
-                }  
+                }
             }
         }
     }
