@@ -26,8 +26,11 @@ export default defineConfig({
       {
         text: '基础组件',
         collapsed: false,
-        items: [{ text: 'Button 按钮', link: 'components/button' }]
-      }
+        items: [
+          { text: 'Button 按钮', link: 'components/button' },
+          { text: 'collapse 下拉菜单', link: 'components/collapse' },
+        ]
+      },
     ],
     socialLinks: [
       { icon: 'github', link: 'https://github.com/Huuyii-sleeping/hy-element' }
