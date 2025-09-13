@@ -1,5 +1,6 @@
 import { beforeAll, expect, vi, test, describe } from "vitest";
 import { DOMWrapper, mount, VueWrapper } from "@vue/test-utils";
+import transitionEvents from "./transitionEvents";
 
 // @ts-nocheck
 import Collapse from "./Collapse.vue";
@@ -163,7 +164,7 @@ describe('Collapse.vue', () => {
             }
         )
         expect(warn.mock.calls).toMatchInlineSnapshot(
-                `
+            `
           [
             [
               "according mode should only have one active name",
@@ -171,5 +172,41 @@ describe('Collapse.vue', () => {
           ]
         `
         )
+    })
+})
+
+describe('Collapse/transitionEvents.ts', () => {
+    const wrapper = mount(() => <div></div>)
+    test('beforeEnter', () => {
+        transitionEvents.beforeEnter(wrapper.element)
+        expect(wrapper.element.style.height).toBe('0px')
+        expect(wrapper.element.style.overflow).toBe('hidden')
+    })
+    test('enter', () => {
+        transitionEvents.enter(wrapper.element)
+        expect(wrapper.element.style.height).toBe(
+            `${wrapper.element.scrollHeight}px`
+        )
+    })
+    test('afterEnter', () => {
+        transitionEvents.afterEnter(wrapper.element)
+        expect(wrapper.element.style.height).toBe('')
+        expect(wrapper.element.style.overflow).toBe('')
+    })
+    test('beforeLeave', () => {
+        transitionEvents.beforeLeave(wrapper.element)
+        expect(wrapper.element.style.height).toBe(
+            `${wrapper.element.scrollHeight}px`
+        )
+        expect(wrapper.element.style.overflow).toBe('hidden')
+    })
+    test('leave', () => {
+        transitionEvents.leave(wrapper.element)
+        expect(wrapper.element.style.height).toBe('0px')
+    })
+    test('afterLeave', () => {
+        transitionEvents.afterLeave(wrapper.element)
+        expect(wrapper.element.style.height).toBe('')
+        expect(wrapper.element.style.overflow).toBe('')
     })
 })

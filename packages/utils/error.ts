@@ -1,20 +1,24 @@
 import { isString } from "lodash-es";
 
-class hyUIError extends Error{
-    constructor(msg: string){
+class hyUIError extends Error {
+    constructor(msg: string) {
         super(msg)
         this.name = 'hyUIERROR'
     }
 }
 
-export function throwError(scope: string, msg: string){
-    throw new hyUIError(`[${scope}]: ${msg}`) // 组件名 + 错误信息的样子
+function createError(scope: string, msg: string) {
+    return new hyUIError(`[${scope}]: ${msg}`)
+}
+
+export function throwError(scope: string, msg: string) {
+    throw createError(scope, msg) // 组件名 + 错误信息的样子
 }
 
 export function debugWarn(error: Error): void
 export function debugWarn(scope: string, msg: string): void
-export function debugWarn(scope: string|Error, msg?:string){
-    if(process.env.NODE_ENV !== 'production'){
+export function debugWarn(scope: string | Error, msg?: string) {
+    if (process.env.NODE_ENV !== 'production') {
         const err = isString(scope) ? new hyUIError(`[${scope}]: ${msg}`) : scope
         console.warn(err)
     }

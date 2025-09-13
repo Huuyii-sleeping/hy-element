@@ -3,6 +3,8 @@ import type { AlertType } from './types'
 import { mount } from '@vue/test-utils'
 import Alert from './Alert.vue'
 import Icon from '../Icon/Icon.vue'
+import { hyAlert } from './index'
+import { withInstall } from '@hy-element/utils'
 
 describe('Alert.vue', () => {
 	const title = 'Test Alert'
@@ -127,5 +129,24 @@ describe('Alert.vue', () => {
 		expect(wrapper.find('.hy-alert').attributes().style).toBe('display: none;')
 		await wrapper.vm.open()
 		expect(wrapper.find('.hy-alert').attributes().style).toBe('')
+	})
+})
+
+describe('Alert/index', () => {
+	it('should be exported with install', () => {
+		expect(hyAlert?.install).toBeDefined()
+	})
+	it('component should be exported', () => {
+		expect(hyAlert).toBe(Alert)
+	})
+
+	// 可造
+	it('should enhance Alert component', () => {
+		const enhanceAlert = withInstall(Alert)
+		expect(enhanceAlert).toBe(hyAlert)
+	})
+	it('should apply specific enhance', () => {
+		const enhanceAlert = withInstall(Alert)
+		expect(enhanceAlert).toHaveProperty('install')
 	})
 })
