@@ -1,0 +1,100 @@
+.hy-alert {
+	--hy-alert-padding: 8px 16px;
+	--hy-alert-border-radius-base: var(--hy-border-radius-base);
+	--hy-alert-bg-color: var(--hy-color-white);
+	--hy-alert-title-font-size: 14px;
+	--hy-alert-title-font-size-with-desc: 16px;
+	--hy-alert-desc-font-size: 14px;
+	--hy-alert-text-color: var(--hy-text-color-primary);
+	--hy-alert-top-margin: 20px;
+	--hy-alert-icon-size: 16px;
+	--hy-alert-icon-margin: 8px;
+	--hy-alert-big-icon-size: 28px;
+	--hy-alert-big-icon-margin: 12px;
+}
+.hy-alert {
+	padding: var(--hy-alert-padding);
+	margin: 0;
+	box-sizing: border-box;
+	border-radius: var(--hy-alert-border-radius-base);
+	position: relative;
+	background-color: var(--hy-alert-bg-color);
+	overflow: hidden;
+	opacity: 1;
+	display: flex;
+	align-items: center;
+	transition: opacity var(--hy-transition-duration);
+	margin-top: var(--hy-alert-top-margin);
+	.hy-alert__icon {
+		color: var(--hy-alert-text-color);
+		font-size: var(--hy-alert-icon-size);
+		width: var(--hy-alert-icon-size);
+		margin-right: var(--hy-alert-icon-margin);
+		&.big-icon {
+			font-size: var(--hy-alert-big-icon-size);
+			width: var(--hy-alert-big-icon-size);
+			margin-right: var(--hy-alert-big-icon-margin);
+		}
+	}
+	.hy-alert__content {
+		color: var(--hy-alert-text-color);
+		vertical-align: text-top;
+		.hy-alert__title {
+			font-size: var(--hy-alert-title-font-size);
+			line-height: 24px;
+			&.with-desc {
+				font-size: var(--hy-alert-title-font-size-with-desc);
+			}
+		}
+		.hy-alert__description {
+			font-size: var(--hy-alert-desc-font-size);
+			margin: 0;
+		}
+
+		.hy-alert__close {
+			font-size: var(--hy-alert-close-font-size);
+			opacity: 1;
+			position: absolute;
+			top: 12px;
+			right: 15px;
+			cursor: pointer;
+			:deep(.hy-icon) {
+				vertical-align: top;
+			}
+		}
+		&.hy-alert__light {
+			.hy-alert__close {
+				color: var(--hy-text-color-placeholder);
+			}
+		}
+		&.hy-alert__dark {
+			.hy-alert__close {
+				color: var(--hy-color-white);
+			}
+		}
+	}
+
+	&.text-center {
+		justify-content: center;
+		span,
+		p {
+			text-align: center;
+		}
+	}
+}
+
+.hy-alert-fade-enter-from,
+.hy-alert-fade-leave-to {
+	opacity: 0;
+}
+
+@each $val in success, warning, info, danger {
+	.hy-alert__$(val).hy-alert__light {
+		--hy-alert-text-color: var(--hy-color-$(val));
+		--hy-alert-bg-color: var(--hy-color-$(val)-light-9);
+	}
+	.hy-alert__$(val).hy-alert__dark {
+		--hy-alert-text-color: var(--hy-color-white);
+		--hy-alert-bg-color: var(--hy-color-$(val));
+	}
+}

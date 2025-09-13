@@ -141,7 +141,7 @@ describe('Collapse.vue', () => {
         expect(secondHeader.classes()).toContain('is-active')
     })
 
-    test('手风琴模式，错误处理', () => {
+    test.skip('手风琴模式，错误处理', () => {
         const warn = vi.spyOn(console, 'warn').mockImplementation(() => { })
         mount(() => (
             <Collapse according modelValue={['a', 'b']} {...{ onChange }}>

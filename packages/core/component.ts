@@ -1,4 +1,4 @@
-import { hyButton, hyIcon, hyButtonGroup, hyCollapse, hyCollapseItem } from "@hy-element/components";
+import { hyButton, hyIcon, hyButtonGroup, hyCollapse, hyCollapseItem, hyAlert } from "@hy-element/components";
 import type { Plugin } from 'vue'
 
 export default [
@@ -6,5 +6,6 @@ export default [
     hyIcon,
     hyButtonGroup,
     hyCollapse,
-    hyCollapseItem
+    hyCollapseItem,
+    hyAlert,
 ] as Plugin[]
