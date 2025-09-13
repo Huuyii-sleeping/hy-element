@@ -28,11 +28,13 @@ describe('install', () => {
     it('withInstall should work', () => {
         const wrapper = mount(() => <div id="app"></div>)
         const app = createApp(AppComp)
-        app.use(compA).use(compB).mount(wrapper.element)
+        app.use(compA).mount(wrapper.element)
         expect(compA.install).toBeDefined()
         expect(compB.install).toBeDefined()
-        expect(wrapper.findComponent(compA)).toBeTruthy()
-        expect(wrapper.findComponent(compB)).toBeTruthy()
+        // expect(wrapper.findComponent(compA)).toBeTruthy() // 错误的写法
+        // expect(wrapper.findComponent(compB)).toBeTruthy()
+        expect(app._context.components['comA']).toBeTruthy()
+        expect(app._context.components['comB']).toBeFalsy()
     })
 
     it('makeInstaller should work', () => {
