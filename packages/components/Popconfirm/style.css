@@ -1,0 +1,13 @@
+.hy-popconfirm{
+    .hy-popconfirm__main{
+        display: flex;
+        align-items: centhy;
+        i {
+            margin-right: 5px;
+        }
+    }
+    .hy-popconfirm__action{
+        text-align: right;
+        margin-top: 8px
+    }
+}
