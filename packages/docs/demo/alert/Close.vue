@@ -1,9 +1,9 @@
 <script setup>
-	import { hyMessage } from 'hy-element'
+	// import { hyMessage } from 'hy-element'
 
-	function handleClose() {
-		hyMessage.info('close callback')
-	}
+	// function handleClose() {
+	// 	hyMessage.info('close callback')
+	// }
 </script>
 <template>
 	<div class="basic block">
