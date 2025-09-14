@@ -5,7 +5,8 @@ import {
     hyAlert,
     hyCollapse,
     hyCollapseItem,
-    hyIcon
+    hyIcon,
+    hyTooltip,
 } from '../index'
 import type { Plugin } from "vue";
 import { get, map } from "lodash-es";
@@ -16,7 +17,8 @@ const comps = [
     hyAlert,
     hyCollapse,
     hyCollapseItem,
-    hyIcon
+    hyIcon,
+    hyTooltip,
 ] as Plugin[]
 
 describe('component/index', () => {

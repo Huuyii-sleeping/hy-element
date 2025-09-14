@@ -5,7 +5,7 @@ import { compression } from 'vite-plugin-compression2'
 import { readFileSync } from 'fs'
 import shell from 'shelljs'
 import { delay } from 'lodash-es'
-import hooks from './hooksPlugin'
+import { hooksPlugin as hooks } from '@hy-element/vite-plugins'
 import terser from '@rollup/plugin-terser'
 
 const isProd = process.env.NODE_ENV === 'production'

@@ -5,7 +5,7 @@ import dts from 'vite-plugin-dts'
 import { readdirSync } from 'fs'
 import { delay, filter, includes, map } from 'lodash-es'
 import shell from 'shelljs'
-import hooks from './hooksPlugin'
+import { hooksPlugin as hooks } from '@hy-element/vite-plugins'
 import terser from '@rollup/plugin-terser'
 
 const isProd = process.env.NODE_ENV === 'production'
