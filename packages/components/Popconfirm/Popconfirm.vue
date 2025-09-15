@@ -6,12 +6,13 @@ import type { PopconfirmEmits, PopconfirmProps } from './types';
 import { hyButton } from '../Button';
 import { hyIcon } from '../Icon';
 import { addUnit } from '@hy-element/utils';
+import { useLocale } from '@hy-element/hooks';
 defineOptions({
     name: 'hyPopconfirm'
 })
 const props = withDefaults(defineProps<PopconfirmProps>(), {
     title: '',
-    confirmButtonType: 'primary',
+    confirmButtonType: 'primary',   
     confirmButtonText: 'Yes',
     cancelButtonText: 'No',
     icon: 'question-circle',
@@ -23,6 +24,7 @@ const tooltipRef = ref<TooltipInstance>()
 const style = computed(() => ({
     width: addUnit(props.width)
 }))
+const { t } = useLocale()
 const emits = defineEmits<PopconfirmEmits>()
 function hidePopper() {
     tooltipRef.value?.hide()
@@ -47,10 +49,10 @@ function cancel(e: MouseEvent) {
                 </div>
                 <div class="hy-popconfirm__action">
                     <hy-button class="hy-popconfirm__cancel" :type="cancelButtonType" size="small" @click="cancel">
-                        {{ cancelButtonText }}
+                        {{ cancelButtonText || t('popconfirm.confirmButtonText') }}
                     </hy-button>
                     <hy-button class="hy-popconfirm__confirm" :type="confirmButtonType" size="small" @click="confirm">
-                        {{ confirmButtonText }}
+                        {{ confirmButtonText || t('popconfirm.cancelButtonText') }}
                     </hy-button>
                 </div>
             </div>
