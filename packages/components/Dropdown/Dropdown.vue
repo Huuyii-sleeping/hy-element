@@ -33,6 +33,8 @@ import { isNil, omit } from 'lodash-es';
 import DropdownItem from './DropdownItem.vue';
 import hyTooltip from '../Tooltip/Tooltip.vue';
 import { DROPDOWN_CTX_KEY } from './constants';
+import { useDisabledStyle } from '@hy-element/hooks';
+
 defineOptions({
     name: 'hyDropdown',
     inheritAttrs: false
@@ -52,6 +54,7 @@ function handleItemClick(e: DropdownItemProps) {
     props.hideOnclick && tooltipRef.value?.hide()
     !isNil(e.command) && emits('command', e.command)
 }
+!TEST && useDisabledStyle()
 provide<DropdownContent>(DROPDOWN_CTX_KEY, {
     handleItemClick,
     size: computed(() => props.size)

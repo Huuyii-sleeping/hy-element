@@ -1,26 +1,32 @@
 <template>
-  <hy-button type="primary" size="small">我是按钮</hy-button>
-
-  <hy-popconfirm title="确定要删除吗？" placement="bottom" @confirm="handleConfirm" @cancel="handleCancel"
-    @click-outside="visible = false">
-    <template #reference>
-      <button>点击我弹出确认框</button>
-    </template>
-  </hy-popconfirm>
+  <div class="row">
+    <div class="col">
+      <div class="desc">disabled</div>
+      <hy-dropdown :items="items" disabled>
+        <span class="dropdown-link">
+          Dropdown List
+          <hy-icon icon="angle-down"></hy-icon>
+        </span>
+      </hy-dropdown>
+    </div>
+    <div class="col">
+      <div class="desc">undisabled</div>
+      <hy-dropdown :items="items">
+        <span class="dropdown-link">
+          Dropdown List
+          <hy-icon icon="angle-down"></hy-icon>
+        </span>
+      </hy-dropdown>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-
-const visible = ref(false)
-
-function handleConfirm() {
-  console.log('确认删除')
-  visible.value = false
-}
-
-function handleCancel() {
-  console.log('取消操作')
-  visible.value = false
-}
+import { type DropdownItemProps } from 'hy-element';
+const items: DropdownItemProps[] = [
+  { command: '1', label: 'Action1' },
+  { command: '2', label: 'Action2' },
+  { command: '3', label: 'Action3', disabled: true },
+  { command: '4', label: 'Action4', divided: true},
+]
 </script>
