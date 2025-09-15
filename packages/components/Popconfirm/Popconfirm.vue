@@ -46,10 +46,10 @@ function cancel(e: MouseEvent) {
                     {{ title }}
                 </div>
                 <div class="hy-popconfirm__action">
-                    <hy-button :type="cancelButtonType" size="small" @click="cancel">
+                    <hy-button class="hy-popconfirm__cancel" :type="cancelButtonType" size="small" @click="cancel">
                         {{ cancelButtonText }}
                     </hy-button>
-                    <hy-button :type="confirmButtonType" size="small" @click="confirm">
+                    <hy-button class="hy-popconfirm__confirm" :type="confirmButtonType" size="small" @click="confirm">
                         {{ confirmButtonText }}
                     </hy-button>
                 </div>

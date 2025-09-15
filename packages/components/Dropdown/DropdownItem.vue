@@ -1,0 +1,40 @@
+<template>
+    <li v-if="divided" role="separator" class="divided-placeholder"></li>
+    <li :id="`dropdown-item-${command ?? useId().value}`" :class="{
+        'hy-dropdown__item': true,
+        ['hy-dorpdown__item--' + size]: size,
+        'is-disabled': disabled,
+        'is-divided': divided
+    }" @click="handleClick">
+        <slot>{{ label }}</slot>
+    </li>
+</template>
+
+<script setup lang="ts">
+import type { DropdownItemProps } from './types';
+import { DROPDOWN_CTX_KEY } from './constants';
+import { inject, computed } from 'vue'
+import { useId } from '@hy-element/hooks';
+
+defineOptions({
+    name: 'hyDropdownItem'
+})
+const props = withDefaults(defineProps<DropdownItemProps>(), {
+    disabled: false,
+    divided: false,
+    command: useId().value
+})
+
+const ctx = inject(DROPDOWN_CTX_KEY)
+const size = computed(() => ctx?.size.value)
+
+function handleClick() {
+    if (props.disabled) return
+    ctx?.handleItemClick(props)
+}
+
+</script>
+
+<style scoped>
+@import './style.css'
+</style>
