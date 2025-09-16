@@ -1,0 +1,81 @@
+.hy-message {
+	--hy-message-bg-color: var(--hy-color-info-light-9);
+	--hy-message-border-color: var(--hy-border-color-lighter);
+	--hy-message-padding: 15px 19px;
+	--hy-message-close-size: 16px;
+	--hy-message-close-icon-color: var(--hy-text-color-placeholder);
+	--hy-message-close-hover-color: var(--hy-text-color-secondary);
+	--hy-message-icon-size: 16px;
+	--hy-message-icon-margin: 8px;
+}
+
+.hy-message {
+	width: fit-content;
+	max-width: calc(100% - 32px);
+	box-sizing: border-box;
+	border-radius: var(--hy-border-radius-base);
+	border-width: var(--hy-border-width);
+	border-style: var(--hy-border-style);
+	border-color: var(--hy-message-border-color);
+	position: fixed;
+	left: 50%;
+	top: 20px;
+	transform: translateX(-50%);
+	background-color: var(--hy-message-bg-color);
+	padding: var(--hy-message-padding);
+	display: flex;
+	align-items: center;
+	transition:
+		top var(--hy-transition-duration),
+		opacity var(--hy-transition-duration),
+		transform var(--hy-transition-duration);
+	.hy-message__icon {
+		color: var(--hy-message-text-color);
+		font-size: var(--hy-message-icon-size);
+		width: var(--hy-message-icon-size);
+		margin-right: var(--hy-message-icon-margin);
+	}
+	.hy-message__content {
+		color: var(--hy-message-text-color);
+		overflow-wrap: break-word;
+	}
+	&.is-close .hy-message__content {
+		padding-right: 10px;
+	}
+	&.text-center {
+		justify-content: center;
+	}
+	.hy-message__close {
+		display: flex;
+		align-items: center;
+	}
+	.hy-message__close .hy-icon {
+		cursor: pointer;
+	}
+}
+
+@each $val in info, success, warning, danger {
+	.hy-message--$(val) {
+		--hy-message-bg-color: var(--hy-color-$(val)-light-9);
+		--hy-message-border-color: var(--hy-color-$(val)-light-8);
+		--hy-message-text-color: var(--hy-color-$(val));
+		.hy-message__close {
+			--hy-icon-color: var(--hy-color-$(val));
+		}
+	}
+}
+
+.hy-message--error {
+	--hy-message-bg-color: var(--hy-color-danger-light-9);
+	--hy-message-border-color: var(--hy-color-danger-light-8);
+	--hy-message-text-color: var(--hy-color-danger);
+	.hy-message__close {
+		--hy-icon-color: var(--hy-color-danger);
+	}
+}
+
+.hy-message.fade-up-enter-from,
+.hy-message.fade-up-leave-to {
+	opacity: 0;
+	transform: translate(-50%, -100%);
+}

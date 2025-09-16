@@ -3,5 +3,16 @@ import useEventListener from "./useEventListener";
 import useId from "./useId";
 import useDisabledStyle from "./useDisabledStyle";
 import useLocale from "./useLocale";
+import useOffset from "./useOffset";
+import useZindex from "./useZindex";
+export {
+    useZindex,
+    useOffset,
+    useClickOutside,
+    useEventListener,
+    useId,
+    useDisabledStyle,
+    useLocale
+}
 
-export { useClickOutside, useEventListener, useId, useDisabledStyle, useLocale }
+
