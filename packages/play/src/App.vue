@@ -1,27 +1,15 @@
 <template>
-    <hy-button :plain="true" @click="open1">open1</hy-button>
-    <hy-button :plain="true" @click="open2">open2</hy-button>
+    <hy-input v-model="form.name" show-password type="password"></hy-input>
+    <hy-input v-model="form.desc" type="textarea"></hy-input>
 </template>
 
 <script setup lang="ts">
-import { hyNotification } from 'hy-element';
-import { h } from 'vue'
-function open1() {
-    (hyNotification as Function)({
-        title: 'Title',
-        message: h('i', { style: "color: teal" }, "this is a notification"),
-        position: 'bottom-right'
-    })
+import { reactive } from 'vue';
 
-}
-function open2() {
-    (hyNotification as Function)({
-        title: 'Title',
-        message: h('i', { style: "color: teal" }, "this is a notification"),
-        position: 'top-left',
-        duration: 0,
-    })
-}
+const form = reactive({
+    name: '',
+    desc: '',
+})
 </script>
 
 <style scoped></style>

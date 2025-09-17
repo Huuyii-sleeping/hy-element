@@ -5,6 +5,8 @@ import useDisabledStyle from "./useDisabledStyle";
 import useLocale from "./useLocale";
 import useOffset from "./useOffset";
 import useZindex from "./useZindex";
+import useFocusController from "./useFocusController";
+
 export {
     useZindex,
     useOffset,
@@ -12,7 +14,7 @@ export {
     useEventListener,
     useId,
     useDisabledStyle,
-    useLocale
+    useLocale,
+    useFocusController,
 }
-
 

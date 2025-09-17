@@ -11,7 +11,8 @@ import {
     hyPopconfirm,
     hyDropdown,
     hyDropdownItem,
-    hyConfigProvider
+    hyConfigProvider,
+    hyInput
 } from "@hy-element/components";
 import type { Plugin } from 'vue'
 
@@ -29,4 +30,5 @@ export default [
     hyConfigProvider,
     hyMessage,
     hyNotification,
+    hyInput,
 ] as Plugin[]
