@@ -27,7 +27,13 @@
   ovhyflow-wrap: anywhhye;
   ovhyflow: hidden;
   z-index: 9999;
-  right: 10px;
+  &.right{
+    right: 10px;
+  }
+  &.left{
+    left: 10px;
+  }
+  
 
   .hy-notification__text {
     margin: 0 10px;

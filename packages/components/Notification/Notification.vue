@@ -4,7 +4,8 @@
         <div ref="notificationRef" class="hy-notification" :class="{
             [`hy-notification--${type}`]: type,
             'show-close': showClose,
-        }" :style="cssStyle" v-show="visible" role="alert" @click="onClick" @mouseenter="clearTimer"
+            [horizontalClass]: true
+        }"  :style="cssStyle" v-show="visible" role="alert" @click="onClick" @mouseenter="clearTimer"
             @mouseleave="startTimmer">
             <hy-icon v-if="iconName" :icon="iconName" class="hy-notification__icon"></hy-icon>
             <div class="hy-notification__text">
@@ -24,10 +25,10 @@
 
 <script setup lang="ts">
 import type { NotificationProps, NotificationComponmentInstance } from './types';
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { delay, bind } from 'lodash-es'
 import { useEventListener, useOffset } from '@hy-element/hooks'
-import { RenderVnode, typeIconMap } from '@hy-element/utils'
+import { addUnit, RenderVnode, typeIconMap } from '@hy-element/utils'
 import hyIcon from '../Icon/Icon.vue'
 import { getLastBottomOffset } from './methods';
 
@@ -37,6 +38,7 @@ defineOptions({
 const props = withDefaults(defineProps<NotificationProps>(), {
     type: 'info',
     duration: 3000,
+    position: 'top-right',
     offset: 20,
     transitionName: 'fade',
     showClose: true
@@ -47,6 +49,8 @@ const notificationRef = ref<HTMLDivElement>()
 
 const iconName = computed(() => typeIconMap.get(props.type) ?? 'circle-info')
 
+const horizontalClass = computed(() => props.position.endsWith('right') ? 'right' : 'left')
+const verticalProperty = computed(() => props.position.startsWith('top') ? 'top' : 'bottom')
 // div 的高度
 const boxHeight = ref(0)
 
@@ -56,7 +60,7 @@ const { topOffset, bottomOffset } = useOffset({
     boxHeight,
 })
 const cssStyle = computed(() => ({
-    top: topOffset.value + 'px',
+    [verticalProperty.value]: addUnit(topOffset.value),
     zIndex: props.zIndex,
 }))
 
