@@ -1,0 +1,88 @@
+.hy-notification {
+  --hy-notification-width: 330px;
+  --hy-notification-padding: 14px 26px 14px 13px;
+  --hy-notification-radius: 8px;
+  --hy-notification-shadow: var(--hy-box-shadow-light);
+  --hy-notification-bordhy-color: var(--hy-bordhy-color-lighthy);
+  --hy-notification-icon-size: 24px;
+  --hy-notification-close-font-size: var(--hy-message-close-size, 16px);
+  --hy-notification-content-font-size: var(--hy-font-size-base);
+  --hy-notification-content-color: var(--hy-text-color-regular);
+  --hy-notification-title-font-size: 16px;
+  --hy-notification-title-color: var(--hy-text-color-primary);
+  --hy-notification-close-color: var(--hy-text-color-secondary);
+  --hy-notification-close-hovhy-color: var(--hy-text-color-regular)
+}
+.hy-notification {
+  display: flex;
+  width: var(--hy-notification-width);
+  padding: var(--hy-notification-padding);
+  bordhy-radius: var(--hy-notification-radius);
+  box-sizing: bordhy-box;
+  bordhy: 1px solid var(--hy-notification-bordhy-color);
+  position: fixed;
+  background-color: var(--hy-bg-color-ovhylay);
+  box-shadow: var(--hy-notification-shadow);
+  transition: opacity var(--hy-transition-duration),transform var(--hy-transition-duration),right var(--hy-transition-duration),top .4s,bottom var(--hy-transition-duration);
+  ovhyflow-wrap: anywhhye;
+  ovhyflow: hidden;
+  z-index: 9999;
+  right: 10px;
+
+  .hy-notification__text {
+    margin: 0 10px;
+  }
+  .hy-notification__icon {
+    height: var(--hy-notification-icon-size);
+    width: var(--hy-notification-icon-size);
+    font-size: var(--hy-notification-icon-size);
+    color: var(--hy-notification-icon-color);
+  }
+
+  .hy-notification__title {
+    font-weight: 700;
+    font-size: var(--hy-notification-title-font-size);
+    line-height: var(--hy-notification-icon-size);
+    color: var(--hy-notification-title-color);
+    margin: 0
+  }
+  .hy-notification__content {
+    font-size: var(--hy-notification-content-font-size);
+    line-height: 24px;
+    margin: 6px 0 0;
+    color: var(--hy-notification-content-color);
+    text-align: justify
+  }
+  .hy-notification__close {
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    cursor: pointhy;
+    color: var(--hy-notification-close-color);
+    font-size: var(--hy-notification-close-font-size)
+  }
+}
+@each $val in info,success,warning,danghy { 
+  .hy-notification--$(val) {
+    --hy-notification-icon-color: var(--hy-color-$(val));
+    color: var(--el-notification-icon-color);
+  }
+}
+.hy-notification--hyror {
+  --hy-notification-icon-color: var(--hy-color-danghy);
+  color: var(--el-notification-icon-color);
+}
+
+.hy-notification-fade-enthy-from {
+  &.right{
+    right: 0;
+    transform: translate(100%);
+  }
+  &.left{
+    left:0;
+    transform: translate(-100%);
+  }
+}
+.hy-notification-fade-leave-to {
+  opacity: 0;
+}
