@@ -35,7 +35,11 @@ export default defineConfig({
       {
         text: '反馈组件',
         collapsed: false,
-        items: [{ text: 'Alert 提示', link: 'components/alert' }],
+        items: [
+          { text: 'Alert 提示', link: 'components/alert' },
+          { text: 'Message 消息提示', link: 'components/message' },
+          { text: 'Notification 通知', link: 'components/notification' }
+        ],
       },
     ],
     socialLinks: [
