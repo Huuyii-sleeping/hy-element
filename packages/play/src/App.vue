@@ -1,15 +1,17 @@
 <template>
-    <hy-input v-model="form.name" show-password type="password"></hy-input>
-    <hy-input v-model="form.desc" type="textarea"></hy-input>
+    <hy-button @click="openConfirm" plain>MessageBox</hy-button>
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue';
-
-const form = reactive({
-    name: '',
-    desc: '',
-})
+import { hyMessageBox, hyMessage } from 'hy-element'
+function openConfirm(){
+    hyMessageBox.confirm('property will parmently delete the file')
+    .then((action: any) => {
+        hyMessage.info(`action: ${action}`)
+    }).catch((action: any) => {
+        hyMessage.awrning(`action: ${action}`)
+    })
+}
 </script>
 
 <style scoped></style>
