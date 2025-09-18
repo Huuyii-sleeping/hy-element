@@ -14,6 +14,7 @@ import {
     hyConfigProvider,
     hyInput,
     hyMessageBox,
+    hyLoading,
 } from "@hy-element/components";
 import type { Plugin } from 'vue'
 
@@ -33,4 +34,5 @@ export default [
     hyNotification,
     hyInput,
     hyMessageBox,
+    hyLoading,
 ] as Plugin[]
