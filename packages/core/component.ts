@@ -15,6 +15,7 @@ import {
     hyInput,
     hyMessageBox,
     hyLoading,
+    hySwitch,
 } from "@hy-element/components";
 import type { Plugin } from 'vue'
 
@@ -35,4 +36,5 @@ export default [
     hyInput,
     hyMessageBox,
     hyLoading,
+    hySwitch,
 ] as Plugin[]
