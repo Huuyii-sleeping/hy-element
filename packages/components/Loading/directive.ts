@@ -36,8 +36,9 @@ function createInstance(
 }
 
 export const vLoading: Directive<ElementLoading, boolean> = {
+    // binding 会自动获取指令的绑定值
     mounted(el, binding) {
-        if (binding) createInstance(el, binding)
+        if (binding.value) createInstance(el, binding)
     },
     updated(el, binding){
         if(binding.oldValue === binding.value) return 
@@ -45,7 +46,7 @@ export const vLoading: Directive<ElementLoading, boolean> = {
             createInstance(el, binding)
             return 
         }
-        
+        el[INSTANCE_KEY]?.instance.close() // 直接卸载
     },
     unmounted(el){
         el[INSTANCE_KEY]?.instance.close()
