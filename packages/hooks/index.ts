@@ -6,6 +6,7 @@ import useLocale from "./useLocale";
 import useOffset from "./useOffset";
 import useZindex from "./useZindex";
 import useFocusController from "./useFocusController";
+import useProp from "./useProp";
 
 export {
     useZindex,
@@ -16,5 +17,6 @@ export {
     useDisabledStyle,
     useLocale,
     useFocusController,
+    useProp
 }
 

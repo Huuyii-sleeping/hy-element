@@ -52,6 +52,8 @@ import type { InputEmits, InputInstance, InputProps } from './types';
 import { useFocusController } from '@hy-element/hooks';
 import { each, noop } from 'lodash-es'
 import hyIcon from '../Icon/Icon.vue'
+import { useFormItem } from '../Form';
+import { debugWarn } from '@hy-element/utils';
 
 defineOptions({
     name: 'hyInput',
@@ -70,7 +72,9 @@ const textareaRef = shallowRef<HTMLTextAreaElement>()
 
 const _ref = computed(() => inputRef.value || textareaRef.value)
 const attrs = useAttrs()
+const { formItem } = useFormItem()
 const isDisabled = computed(() => props.disabled)
+
 // 一键清除
 const showClear = computed(() => props.clearable && !!innerValue.value && !isDisabled.value && isFocus)
 // 眼睛图标
@@ -80,7 +84,9 @@ const { wrapperRef, isFocus, handleFocus, handleBlur } = useFocusController(
     _ref,
     {
         afterBlur() {
-
+            formItem?.validate('blur').catch(err => {
+                debugWarn(err)
+            })
         }
     }
 )
@@ -89,6 +95,7 @@ const clear: InputInstance['clear'] = function () {
     each(['input', 'change', 'update:modelValue'], (e) => emits(e as any, innerValue.value))
     emits('clear')
     // todo 清空表单检验
+    formItem?.clearValidate()
 }
 const focus: InputInstance['focus'] = async function () {
     await nextTick()
@@ -117,6 +124,9 @@ function togglePwdVisible() {
 watch(() => props.modelValue, (newVal) => {
     innerValue.value = newVal
     // todo 表单校验的触发
+    formItem?.validate('change').catch(err => {
+        debugWarn(err)
+    })
 })
 
 defineExpose<InputInstance>({

@@ -65,9 +65,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: docs
+          path: ./docs  # 仅添加路径指定，确保解压到docs目录
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GH_TOKEN }}
-          publish_dir: .
+          publish_dir: ./docs  # 仅修正部署目录为docs
+    
