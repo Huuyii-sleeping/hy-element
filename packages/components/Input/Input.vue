@@ -17,7 +17,7 @@
                 <span v-if="$slots.prefix" class="hy-input__prefix">
                     <slot name="prefix"></slot>
                 </span>
-                <input class="hy-input__inner" ref="inputRef"
+                <input class="hy-input__inner" ref="inputRef" :id="inputId"
                     :type="showPassword ? (pwdVisible ? 'text' : 'password') : type" :disabled="isDisabled"
                     :reasonly="reasonly" :autocomplete="autocomplete" :placeholder="placeholder" :autofocus="autofocus"
                     :form="form" v-model="innerValue" v-bind="attrs" @input="handleInput" @change="handleChange"
@@ -37,10 +37,10 @@
             </div>
         </template>
         <template v-else>
-            <textarea class="hy-textarea__wrapper" ref="textareaRef" :disabled="isDisabled" :readonly="reasonly"
-                :autocomplete="autocomplete" :placeholder="placeholder" :autofocus="autofocus" :form="form"
-                v-model="innerValue" v-bind="attrs" @input="handleInput" @change="handleChange" @focus="handleFocus"
-                @blur="handleBlur"></textarea>
+            <textarea class="hy-textarea__wrapper" ref="textareaRef" :id="inputId" :disabled="isDisabled"
+                :readonly="reasonly" :autocomplete="autocomplete" :placeholder="placeholder" :autofocus="autofocus"
+                :form="form" v-model="innerValue" v-bind="attrs" @input="handleInput" @change="handleChange"
+                @focus="handleFocus" @blur="handleBlur"></textarea>
         </template>
     </div>
 
@@ -52,7 +52,7 @@ import type { InputEmits, InputInstance, InputProps } from './types';
 import { useFocusController } from '@hy-element/hooks';
 import { each, noop } from 'lodash-es'
 import hyIcon from '../Icon/Icon.vue'
-import { useFormItem } from '../Form';
+import { useFormItem, useFormDisabled, useFormItemInputId } from '../Form';
 import { debugWarn } from '@hy-element/utils';
 
 defineOptions({
@@ -72,8 +72,12 @@ const textareaRef = shallowRef<HTMLTextAreaElement>()
 
 const _ref = computed(() => inputRef.value || textareaRef.value)
 const attrs = useAttrs()
+// const isDisabled = computed(() => props.disabled)
+const isDisabled = useFormDisabled()
+
 const { formItem } = useFormItem()
-const isDisabled = computed(() => props.disabled)
+
+const { inputId } = useFormItemInputId(props, formItem)
 
 // 一键清除
 const showClear = computed(() => props.clearable && !!innerValue.value && !isDisabled.value && isFocus)

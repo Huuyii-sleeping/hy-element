@@ -17,7 +17,9 @@ import {
     hyLoading,
     hySwitch,
     hySelect,
-    hyOptions
+    hyOptions,
+    hyForm,
+    hyFormItem,
 } from "@hy-element/components";
 import type { Plugin } from 'vue'
 
@@ -40,5 +42,7 @@ export default [
     hyLoading,
     hySwitch,
     hySelect,
-    hyOptions
+    hyOptions,
+    hyForm,
+    hyFormItem,
 ] as Plugin[]

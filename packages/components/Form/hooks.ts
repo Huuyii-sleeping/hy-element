@@ -23,7 +23,7 @@ interface UseFormItemInputCommenProps extends Record<string, any> {
 }
 
 // 实现自动输入控件（如输入框，选择器等）DOM ID 并和上下文联系，确保id的正确注册
-export function useFormInputId(
+export function useFormItemInputId(
     props: UseFormItemInputCommenProps,
     formItemContext?: FormItemContext
 ) {

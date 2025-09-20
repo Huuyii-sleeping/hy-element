@@ -2,7 +2,7 @@
 import { computed, inject, nextTick, onMounted, onUnmounted, provide, reactive, ref, toRefs, type Ref } from 'vue';
 import { FORM_CTX_EKY, FORM_ITEM_CTX_KEY } from './constants';
 import type { FormItemContext, FormItemInstance, FormItemProps, FormItemRule, FormValidateCallback, FormValidateFailuer, ValidateStatus } from './types';
-import { isNil, get, isString, size, filter, map, keys, includes, isArray, cloneDeep, some } from 'lodash-es';
+import { isNil, get, isString, size, filter, map, keys, includes, isArray, cloneDeep, some, isNumber, endsWith } from 'lodash-es';
 import Schema, { type RuleItem } from 'async-validator';
 import { useId } from '@hy-element/hooks';
 
@@ -38,6 +38,16 @@ const hasLabel = computed(() => !!(props.label || slots.label))
 const labelFor = computed(() => props.for || (inputIds.value.length ? inputIds.value[0] : ''))
 
 const currentLabel = computed(() => `${props.label ?? ''}${ctx?.labelSuffix ?? ''}`)
+
+const normalizeLabelWidth = computed(() => {
+    const _normalizeStyle = (val: number | string) => {
+        if (isNumber(val)) return `${val}px`
+        return endsWith(val, 'px') ? val : `${val}px`
+    }
+    if (props.labelWidth) return _normalizeStyle(props.labelWidth)
+    if (ctx?.labelWidth) return _normalizeStyle(ctx?.labelWidth)
+    return '150px'
+})
 
 const isDisabled = computed(() => ctx?.disabled || props.disabled)
 
@@ -223,7 +233,7 @@ defineExpose<FormItemInstance>({
         </component>
         <div class="hy-form-item__content">
             <slot :validate="validate"></slot>
-            <div class="hy-form-item_error-msg" v-if="validateStatus === 'error'">
+            <div class="hy-form-item__error-msg" v-if="validateStatus === 'error'">
                 <template v-if="ctx?.showMessage && showMessage">
                     <!-- 这个errMsg可以将错误的原因暴露出去 -->
                     <slot name="error" :error="errMsg">{{ errMsg }}</slot>
@@ -232,3 +242,11 @@ defineExpose<FormItemInstance>({
         </div>
     </div>
 </template>
+
+<style scoped>
+@import './style.css';
+
+.hy-form-item {
+    --hy-form-label-width: v-bind(normalizeLabelWidth) !important
+}
+</style>
