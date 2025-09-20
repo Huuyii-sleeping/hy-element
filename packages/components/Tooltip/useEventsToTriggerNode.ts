@@ -1,5 +1,5 @@
 import { onUnmounted, watch } from "vue";
-import type { TooltipProps } from "hy-element";
+import type { TooltipProps } from "../Tooltip/types";
 import { each, isElement } from "lodash-es";
 import { onMounted, type ComputedRef, type Ref, type WatchStopHandle } from "vue";
 

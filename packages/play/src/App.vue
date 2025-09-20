@@ -1,15 +1,18 @@
 <template>
-    <hy-switch size="default" v-model="switchRef" :active-value="0" :inactive-value="1"></hy-switch>
+    <hy-select v-model="value" filterable clearable>
+        <hy-option value="beijing" label="Beijing" />
+        <hy-option value="hangzhou" label="Hangzhou" disabled/>
+        <hy-option value="hebei" label="Hebei" />
+    </hy-select>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 
-// const loading = ref(false)
-const switchRef = ref(1)
-
+const options = ref([
+    { value: 'beijing', label: 'Beijing' },
+    { value: 'shanghai' , label: 'Shanghai', disabled: true },
+    { value: 'hebei', label: 'Hebei' },
+])
+const value = ref('')
 </script>
-
-<style scoped lang="scss">
-    
-</style>
