@@ -1,62 +1,34 @@
-<script setup>
-import { ref } from "vue";
-
-const isLoading = ref(true);
-const activeNames = ref([]);
-</script>
+<!-- ParentComponent.vue -->
 <template>
-    <div style="height: 50%;" class="container" v-loading="isLoading">
-        <hy-collapse v-model="activeNames" accordion>
-            <hy-collapse-item title="Consistency" name="1">
-                <div>
-                    Consistent with real life: in line with the process and logic of real
-                    life, and comply with languages and habits that the users are used to;
-                </div>
-                <div>
-                    Consistent within interface: all elements should be consistent, such
-                    as: design style, icons and texts, position of elements, etc.
-                </div>
-            </hy-collapse-item>
-            <hy-collapse-item title="Feedback" name="2">
-                <div>
-                    Operation feedback: enable the users to clearly perceive their
-                    operations by style updates and interactive effects;
-                </div>
-                <div>
-                    Visual feedback: reflect current state by updating or rearranging
-                    elements of the page.
-                </div>
-            </hy-collapse-item>
-            <hy-collapse-item title="Efficiency" name="3">
-                <div>
-                    Simplify the process: keep operating process simple and intuitive;
-                </div>
-                <div>
-                    Definite and clear: enunciate your intentions clearly so that the
-                    users can quickly understand and make decisions;
-                </div>
-                <div>
-                    Easy to identify: the interface should be straightforward, which helps
-                    the users to identify and frees them from memorizing and recalling.
-                </div>
-            </hy-collapse-item>
-            <hy-collapse-item title="Controllability" name="4">
-                <div>
-                    Decision making: giving advices about operations is acceptable, but do
-                    not make decisions for the users;
-                </div>
-                <div>
-                    Controlled consequences: users should be granted the freedom to
-                    operate, including canceling, aborting or terminating current
-                    operation.
-                </div>
-            </hy-collapse-item>
-        </hy-collapse>
+    <div>
+        <hy-button @click="showDialog = true">打开对话框</hy-button>
+
+        <hy-dialog v-model:visible="showDialog" title="提示" draggable>
+            <span> test nested Dialog </span>
+            <template #footer>
+                <hy-button type="primary" @click="innerVisible = true">open inner dialog</hy-button>
+            </template>
+            <hy-dialog v-model:visible="innerVisible" title="inner dialog">
+                <template #footer>
+                    <hy-button @click="handleCancel" type="default">cancel</hy-button>
+                    <hy-button @click="handleConfirm" type="primary">confirm</hy-button>
+                </template>
+            </hy-dialog>
+        </hy-dialog>
     </div>
 </template>
 
-<style scoped>
-.container {
-    padding: 10px;
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const showDialog = ref(false)
+const innerVisible = ref(false)
+
+function handleConfirm() {
+    console.log('用户点击了确认')
 }
-</style>
+
+function handleCancel() {
+    console.log('用户点击了取消')
+}
+</script>
