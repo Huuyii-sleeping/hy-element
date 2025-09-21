@@ -5,6 +5,7 @@ import type { DialogEmits, DialogProps } from './types'
 import { useZindex } from '@hy-element/hooks'
 import hyIcon from '../Icon/Icon.vue'
 import hyOverlay from '../Overlay/Overlay.vue'
+import hyButton from '../Button/Button.vue'
 
 defineOptions({
     name: 'hyDialog',
@@ -15,7 +16,7 @@ const props = withDefaults(defineProps<DialogProps>(), {
     title: 'default title',
     showClose: true,
     closeIcon: 'xmark',
-    top: '10px'
+    top: '10px',
 })
 
 const dialogRef = ref<HTMLElement>()
@@ -27,6 +28,8 @@ const emits = defineEmits<DialogEmits>()
 const slots = defineSlots()
 
 const { nextZindex } = useZindex()
+
+const zIndex = nextZindex()
 
 const visible = computed({
     get: () => props.visible,
@@ -40,10 +43,6 @@ function toggleVisible() {
 function handleWrapperClick() {
     if (!props.showClose) return
     toggleVisible()
-}
-
-function destory() {
-    console.log('对话框已销毁')
 }
 
 const position = ref({ x: 0, y: 0 })
@@ -96,8 +95,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <transition name="fade-in-linear" @after-leave="destory()">
-        <hy-overlay v-show="visible" :z-index="nextZindex()" mask>
+    <transition name="fade-in-linear">
+        <hy-overlay v-show="visible" :z-index="zIndex" mask>
             <div class="hy-overlay-dialog" :style="{
                 position: 'fixed',
                 top: 0,

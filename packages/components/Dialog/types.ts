@@ -19,7 +19,7 @@ export interface DialogProps {
     cancelButtonText?: string
     confirmButtonType?: string
     cancelButtonType?: string
-    destory(): void
+    destory?(): void
 }
 
 export interface DialogEmits {
