@@ -1,60 +1,62 @@
+<script setup>
+import { ref } from "vue";
+
+const isLoading = ref(true);
+const activeNames = ref([]);
+</script>
 <template>
-    <hy-form ref="formRef" :model="form" :rules="rules">
-        <hy-form-item label="Activity Name" prop="name">
-            <hy-input v-model="form.name"></hy-input>
-        </hy-form-item>
-        <hy-form-item label="Activity zone" prop="region">
-            <hy-select v-model="form.region" placeholder="please select your zone" :options="options"></hy-select>
-        </hy-form-item>
-        <hy-form-item label="Instance delivery" prop="delivery">
-            <hy-switch v-model="form.delivery"></hy-switch>
-        </hy-form-item>
-        <hy-form-item label="Activity form" prop="desc">
-            <hy-input v-model="form.desc" type="textarea"></hy-input>
-        </hy-form-item>
-        <hy-form-item>
-            <hy-button type="primary" @click="onSubmit"> create </hy-button>
-            <hy-button @click="onReset"> reset </hy-button>
-        </hy-form-item>
-    </hy-form>
+    <div style="height: 50%;" class="container" v-loading="isLoading">
+        <hy-collapse v-model="activeNames" accordion>
+            <hy-collapse-item title="Consistency" name="1">
+                <div>
+                    Consistent with real life: in line with the process and logic of real
+                    life, and comply with languages and habits that the users are used to;
+                </div>
+                <div>
+                    Consistent within interface: all elements should be consistent, such
+                    as: design style, icons and texts, position of elements, etc.
+                </div>
+            </hy-collapse-item>
+            <hy-collapse-item title="Feedback" name="2">
+                <div>
+                    Operation feedback: enable the users to clearly perceive their
+                    operations by style updates and interactive effects;
+                </div>
+                <div>
+                    Visual feedback: reflect current state by updating or rearranging
+                    elements of the page.
+                </div>
+            </hy-collapse-item>
+            <hy-collapse-item title="Efficiency" name="3">
+                <div>
+                    Simplify the process: keep operating process simple and intuitive;
+                </div>
+                <div>
+                    Definite and clear: enunciate your intentions clearly so that the
+                    users can quickly understand and make decisions;
+                </div>
+                <div>
+                    Easy to identify: the interface should be straightforward, which helps
+                    the users to identify and frees them from memorizing and recalling.
+                </div>
+            </hy-collapse-item>
+            <hy-collapse-item title="Controllability" name="4">
+                <div>
+                    Decision making: giving advices about operations is acceptable, but do
+                    not make decisions for the users;
+                </div>
+                <div>
+                    Controlled consequences: users should be granted the freedom to
+                    operate, including canceling, aborting or terminating current
+                    operation.
+                </div>
+            </hy-collapse-item>
+        </hy-collapse>
+    </div>
 </template>
 
-<script setup lang="ts">
-import { reactive, ref } from 'vue';
-import { hyMessage, type FormInstance } from 'hy-element';
-
-const formRef = ref<FormInstance>()
-const form = reactive({
-    name: '',
-    region: '',
-    delivery: false,
-    desc: ''
-})
-
-const options = ref([
-    { value: 'beijing', label: 'Beijing' },
-    { value: 'shanghai', label: 'Shanghai' },
-])
-const rules = reactive({
-    name: [
-        { required: true, message: '输出活动名称', trigger: 'blur' },
-        { min: 3, max: 5, message: '3-5', trigger: 'blur' },
-    ],
-    region: [{ required: true, message: '选择活动区域', trigger: 'change' }],
-    desc: [{ required: true, message: '活动形式', trigger: 'blur' }]
-})
-
-const onSubmit = () => {
-    formRef.value?.validate().then((valid) => {
-        if (valid) {
-            hyMessage.success('submit!')
-        }
-    })
+<style scoped>
+.container {
+    padding: 10px;
 }
-const onReset = () => {
-    formRef.value?.resetFields()
-}
-
-</script>
-
-<style scoped lang="scss"></style>
+</style>

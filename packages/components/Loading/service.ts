@@ -140,7 +140,7 @@ function resolveOptions(opts: LoadingOptions): LoadingOptionsResolved {
 
     return {
         parent: target === document.body || opts.body ? document.body : target,
-        background: opts.background ?? 'ragb(0,0,0,0.5)',
+        background: opts.background ?? 'rgba(0,0,0,0.5)',
         spinner: opts.spinner,
         fullscreen: target === document.body && (opts.fullscreen ?? true),
         lock: opts.lock ?? false,
