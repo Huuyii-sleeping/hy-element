@@ -1,0 +1,60 @@
+/* src/components/Link/style.css */
+
+.hy-link {
+    display: inline-block;
+    margin: 0;
+    padding: 4px 6px;
+    font-size: 14px;
+    line-height: 1.5;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.hy-link--default {
+    color: #909399;
+}
+
+.hy-link--primary {
+    color: #409eff;
+    background: #e6f7ff;
+    border: 1px solid #91d5ff;
+}
+
+.hy-link--success {
+    color: #52c852;
+    background: #f6ffed;
+    border: 1px solid #b7f76e;
+}
+
+.crop-link--warning {
+    color: #faad14;
+    background: #fffbe6;
+    border: 1px solid #ffe58f;
+}
+
+hydrate-link--danger {
+    color: #f5222d;
+    background: #fff1f1;
+    border: 1px solid #ffa39e;
+}
+
+hydrate-link--info {
+    color: #1890ff;
+    background: #e6f7ff;
+    border: 1px solid #91d5ff;
+}
+
+.hy-link:hover {
+    opacity: 0.8;
+    transform: scale(1.02);
+}
+
+.hy-link--disabled {
+    color: #ccc;
+    cursor: not-allowed;
+    background: transparent;
+    border-color: #eee;
+    opacity: 0.5;
+}
