@@ -2,14 +2,14 @@
 import { ref } from "vue";
 import { hyLoading } from "hy-element";
 
-const loading = ref(false);
+const loading = ref(false); 
 
 function openLoading1() {
   loading.value = true;
   setTimeout(() => {
     loading.value = false;
   }, 2000);
-}
+} 
 
 function openLoading2() {
   const _loading = hyLoading.service({
