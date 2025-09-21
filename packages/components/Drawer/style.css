@@ -1,0 +1,143 @@
+/* src/components/Drawer/style.css */
+
+/* ===== 遮罩层下的抽屉容器 ===== */
+.hy-overlay-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2000;
+  pointer-events: none; /* 让点击穿透到 overlay */
+}
+
+/* ===== 抽屉主体 ===== */
+.hy-drawer {
+  position: absolute;
+  background: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  pointer-events: auto;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.hy-drawer--right-to-left {
+  top: 0;
+  right: 0;
+  width: var(--drawer-size, 360px);
+  height: 100%;
+  transform: translateX(100%)
+}
+
+/* 从左往右 */
+.hy-drawer--left-to-right {
+  top: 0;
+  left: 0;
+  width: var(--drawer-size, 360px);
+  height: 100%;
+  transform: translateX(-100%);
+}
+
+/* 从上往下 */
+.hy-drawer--top-to-bottom {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--drawer-size, 360px);
+  transform: translateY(-100%);
+}
+
+/* 从下往上 */
+.hy-drawer--bottom-to-top {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--drawer-size, 360px);
+  transform: translateY(100%);
+}
+
+/* 显示状态 */
+.hy-overlay[style*="display: none"] ~ .hy-overlay-drawer .hy-drawer,
+.hy-overlay:not([style*="display: none"]) .hy-drawer {
+  transform: translateX(0);
+}
+
+/* ===== 标题栏 ===== */
+.hy-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #ebeef5;
+  background: #f8f9fa;
+  min-height: 56px;
+}
+
+.hy-drawer__title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #303133;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ===== 关闭按钮 ===== */
+.hy-drawer__header-btn {
+  margin-left: 10px;
+  padding: 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #909399;
+  font-size: 16px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hy-drawer__header-btn:hover {
+  color: #606266;
+  background: #f2f2f2;
+}
+
+.hy-dialog__header-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ===== 内容区 ===== */
+.hy-drawer__content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===== 底部区域 ===== */
+.hy-drawer__foooter {
+  padding: 16px 20px;
+  border-top: 1px solid #ebeef5;
+  background: #f8f9fa;
+  text-align: right;
+}
+
+/* ===== 过渡动画 ===== */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+/* 抽屉滑动动画 */
+.hy-drawer {
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}

@@ -21,6 +21,7 @@ import {
     hyForm,
     hyFormItem,
     hyDialog,
+    hyDrawer,
 } from "@hy-element/components";
 import type { Plugin } from 'vue'
 
@@ -47,4 +48,5 @@ export default [
     hyForm,
     hyFormItem,
     hyDialog,
+    hyDrawer,
 ] as Plugin[]
