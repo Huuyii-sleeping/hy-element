@@ -65,13 +65,6 @@ demo-preview=../demo/dialog/Center.vue
 demo-preview=../demo/dialog/CloseControl.vue
 :::
 
-## 主题与尺寸
-
-可通过 CSS 变量或 class 自定义样式，组件本身不内置主题切换。
-
-::: preview
-demo-preview=../demo/dialog/Themed.vue
-:::
 
 ## Dialog API
 

@@ -37,6 +37,7 @@ export default defineConfig({
         collapsed: false,
         items: [
           { text: 'Alert 提示', link: 'components/alert' },
+          { text: 'dialog 对话框', link: 'components/dialog' },
           { text: 'Loading 加载', link: 'components/loading' },
           { text: 'Message 消息提示', link: 'components/message' },
           { text: 'MessageBox 消息弹出框', link: 'components/messagebox' },
