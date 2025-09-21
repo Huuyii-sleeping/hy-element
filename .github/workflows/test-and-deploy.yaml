@@ -71,5 +71,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GH_TOKEN }}
-          publish_dir: .  # 仅修正部署目录为docs
+          publish_dir: ./docs  # 仅修正部署目录为docs
     
