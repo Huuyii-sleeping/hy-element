@@ -24,7 +24,7 @@ export default defineConfig({
         ]
       },
       {
-        text: '基础组件',
+        text: 'Basic 基础组件',
         collapsed: false,
         items: [
           { text: 'Button 按钮', link: 'components/button' },
@@ -33,11 +33,12 @@ export default defineConfig({
         ]
       },
       {
-        text: '反馈组件',
+        text: 'Feedback 反馈组件',
         collapsed: false,
         items: [
           { text: 'Alert 提示', link: 'components/alert' },
-          { text: 'dialog 对话框', link: 'components/dialog' },
+          { text: 'Dialog 对话框', link: 'components/dialog' },
+          { text: 'Drawer 抽屉', link: 'components/drawer' },
           { text: 'Loading 加载', link: 'components/loading' },
           { text: 'Message 消息提示', link: 'components/message' },
           { text: 'MessageBox 消息弹出框', link: 'components/messagebox' },
@@ -47,7 +48,7 @@ export default defineConfig({
         ],
       },
       {
-        text: '表单组件',
+        text: 'Form 表单组件',
         collapsed: false,
         items: [
           { text: 'Form 表单', link: 'components/form' },

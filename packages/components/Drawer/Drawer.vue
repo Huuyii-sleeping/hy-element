@@ -10,7 +10,7 @@ defineOptions({ name: 'hyDrawer', inheritAttrs: false })
 
 const props = withDefaults(defineProps<DrawerProps>(), {
     showClose: true,
-    DrawerDirection: 'rtl',
+    direction: 'right-to-left',
     size: '360px',
     title: '',
 })

@@ -1,4 +1,4 @@
-export type DrawerDirection = 'rtl' | 'ltr' | 'ttb' | 'btt'
+export type DrawerDirection = 'right-to-left' | 'left-to-right' | 'top-to-bottom' | 'bottom-to-top'
 
 export interface DrawerProps {
     title?: string
