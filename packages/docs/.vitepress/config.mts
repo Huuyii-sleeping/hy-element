@@ -54,6 +54,13 @@ export default defineConfig({
         items: [
           { text: 'Form 表单', link: 'components/form' },
         ]
+      },
+      {
+        text: 'Data 数据展示',
+        collapsed: false,
+        items: [
+          { text: 'Card 卡片', link: 'components/card' },
+        ]
       }
     ],
     socialLinks: [
