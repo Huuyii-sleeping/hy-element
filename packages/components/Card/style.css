@@ -1,0 +1,78 @@
+
+.hy-card {
+  border-radius: 4px;
+  border: 1px solid #ebeef5;
+  background-color: #fff;
+  overflow: hidden;
+  color: #303133;
+  transition: 0.3s;
+}
+
+.hy-card.is-always-shadow {
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.hy-card.is-hover-shadow:hover {
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.hy-card.is-never-shadow {
+  box-shadow: none;
+}
+
+.hy-card .hy-card__header {
+  padding: 18px 20px;
+  border-bottom: 1px solid #ebeef5;
+  box-sizing: border-box;
+}
+
+.hy-card .hy-card__header:last-child {
+  border-bottom: none;
+}
+
+.hy-card .hy-card__content {
+  padding: 20px;
+}
+
+.hy-card .hy-card__content:last-child {
+  padding-bottom: 20px;
+}
+
+.hy-card .hy-card__footer {
+  padding: 10px 20px;
+  border-top: 1px solid #ebeef5;
+  box-sizing: border-box;
+}
+
+.hy-card .hy-card__footer:first-child {
+  border-top: none;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .hy-card .hy-card__header,
+  .hy-card .hy-card__content,
+  .hy-card .hy-card__footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* 深度选择器 */
+.hy-card :deep(.hy-card__header) h1,
+.hy-card :deep(.hy-card__header) h2,
+.hy-card :deep(.hy-card__header) h3,
+.hy-card :deep(.hy-card__header) h4,
+.hy-card :deep(.hy-card__header) h5,
+.hy-card :deep(.hy-card__header) h6 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.hy-card :deep(.hy-card__content) > :first-child {
+  margin-top: 0;
+}
+
+.hy-card :deep(.hy-card__content) > :last-child {
+  margin-bottom: 0;
+}

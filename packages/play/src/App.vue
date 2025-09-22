@@ -1,5 +1,15 @@
 <template>
-    <hy-link type="primary" href="https://www.baidu.com">1111</hy-link>
+    <hy-card shadow="never">
+        <template #header>
+            test card
+        </template>
+        <template #content>
+            card make it !
+        </template>
+        <template #footer>
+            footer
+        </template>
+    </hy-card>
 </template>
 
 <script setup lang="ts">
