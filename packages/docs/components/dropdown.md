@@ -31,15 +31,6 @@ demo-preview=../demo/dropdown/Basic.vue
 demo-preview=../demo/dropdown/Trigger.vue
 :::
 
-## 点击菜单隐藏
-
-可以通过 `hide-on-click` 属性来配置。
-下拉菜单默认在点击菜单项后会被隐藏，将 `hide-on-click` 属性设置为 false 可以关闭此功能。
-
-::: preview
-demo-preview=../demo/dropdown/HideOnClick.vue
-:::
-
 ## 指令事件
 
 点击菜单项后会触发事件，用户可以通过相应的菜单项 `command` 进行不同的操作。
