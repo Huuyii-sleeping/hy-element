@@ -62,7 +62,7 @@ export default defineConfig({
           { text: 'Card 卡片', link: 'components/card' },
           { text: 'Table 表格', link: 'components/table' },
           { text: 'Carousel 轮播图', link: 'components/carousel' },
-          
+          { text: 'Tree 树形控件', link: 'components/tree' }
         ]
       }
     ],
