@@ -4,6 +4,9 @@ Vue3 + TS 高仿 ElementPlus 打造自己的组件库
 
 一款功能全面、易用性强、文档丰富的UI组件库，完美兼容Element Plus，为开发者提供高效的界面构建解决方案。
 
+## 访问主页(gogogo!!!)
+https://huuyii-sleeping.github.io/hy-element/
+
 ## 特性
 
 ### 🎯 功能覆盖和兼容性
