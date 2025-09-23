@@ -24,6 +24,8 @@ import {
     hyDrawer,
     hyLink,
     hyCard,
+    hyCarousel,
+    hyCarouselItem,
 } from "@hy-element/components";
 import type { Plugin } from 'vue'
 
@@ -53,4 +55,6 @@ export default [
     hyDrawer,
     hyLink,
     hyCard,
+    hyCarousel,
+    hyCarouselItem
 ] as Plugin[]
