@@ -27,7 +27,8 @@ import {
     hyTable,
     hyTableColumn,
     hyCarousel,
-    hyCarouselItem
+    hyCarouselItem,
+    hyTree
 } from "@hy-element/components";
 import type { Plugin } from 'vue'
 
@@ -60,5 +61,6 @@ export default [
     hyTable,
     hyTableColumn,
     hyCarousel,
-    hyCarouselItem
+    hyCarouselItem,
+    hyTree,
 ] as Plugin[]
