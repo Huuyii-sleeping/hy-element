@@ -1,6 +1,6 @@
 <template>
-    <div style="display: none;">
-        <!-- 这个组件主要用于配置，不需要实际渲染 -->
+    <div style="dis主要用play: none;">
+        <!-- 这个组件于配置，不需要实际渲染 -->
     </div>
 </template>
 

@@ -50,6 +50,7 @@ function getHeaderClass(column: any) {
 
 function getHeaderStyle(column: any) {
     const style = {} as any
+    if (!column) return style
     if (column.width) {
         style.width = `${column.width}px`
     }
@@ -60,7 +61,7 @@ function getHeaderStyle(column: any) {
 }
 
 function getCellClass(column: any) {
-
+    if (!column) return ['my-table__cell']
     return [
         `my-table__cell`,
         column.align ? `is-${column.align}` : ''
@@ -69,6 +70,7 @@ function getCellClass(column: any) {
 
 function getCellStyle(column: any) {
     const style = {} as any
+    if (!column) return style
     if (column.width) {
         style.width = `${column.width}px`
     }
