@@ -1,5 +1,5 @@
 <template>
-  <hy-table :data="tableData"  style="width: 100%">
+  <hy-table :data="tableData" stripe style="width: 100%">
     <hy-table-column prop="date" label="Date" width="180" />
     <hy-table-column prop="name" label="Name" width="180" />
     <hy-table-column prop="address" label="Address" />
