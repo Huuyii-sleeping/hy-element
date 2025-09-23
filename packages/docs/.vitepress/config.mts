@@ -61,6 +61,8 @@ export default defineConfig({
         items: [
           { text: 'Card 卡片', link: 'components/card' },
           { text: 'Table 表格', link: 'components/table' },
+          { text: 'Carousel 轮播图', link: 'components/carousel' },
+          
         ]
       }
     ],
